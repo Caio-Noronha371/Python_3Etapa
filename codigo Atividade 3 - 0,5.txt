@@ -1,0 +1,38 @@
+import pandas as pd
+
+df_bruto = pd.read_csv("Tabela 10063.csv", skiprows=3, header=None)
+
+df_bruto.columns = [
+    "regiao_uf",
+    "total_geral",
+    "homens_superior",
+    "mulheres_superior",
+    "total_stem",
+    "homens_stem",
+    "mulheres_stem",
+    "total_saude_edu",
+    "homens_saude_edu",
+    "mulheres_saude_edu",
+]
+
+lista_regioes = ["Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste"]
+df_regioes = df_bruto[df_bruto["regiao_uf"].isin(lista_regioes)].copy()
+
+for col in df_regioes.columns[1:]:
+    df_regioes[col] = pd.to_numeric(df_regioes[col])
+
+tabela_superior = df_regioes[
+    ["regiao_uf", "homens_superior", "mulheres_superior"]
+].reset_index(drop=True)
+tabela_stem = df_regioes[
+    ["regiao_uf", "homens_stem", "mulheres_stem"]
+].reset_index(drop=True)
+tabela_saude_edu = df_regioes[
+    ["regiao_uf", "homens_saude_edu", "mulheres_saude_edu"]
+].reset_index(drop=True)
+
+tabela_superior.to_excel("homens_mulheres_superior.xlsx", index=False)
+tabela_stem.to_excel("homens_mulheres_stem.xlsx", index=False)
+tabela_saude_edu.to_excel("homens_mulheres_saude_educacao.xlsx", index=False)
+
+print("Tabelas salvas com sucesso em formato .xlsx!\n")
