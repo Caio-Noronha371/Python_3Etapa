@@ -1,0 +1,22 @@
+# 1. Mulheres pretas vs Mulheres brancas em Minas Gerais
+dados_mg = indicador_1[indicador_1["uf_regiao"] == "Minas Gerais"].iloc[0]
+dif_mg = dados_mg["mulher_preta_parda"] - dados_mg["mulher_branca"]
+
+# 2. Mulheres pretas vs Homens brancos no Brasil
+dados_brasil = indicador_1[indicador_1["uf_regiao"] == "Brasil"].iloc[0]
+dif_brasil = dados_brasil["mulher_preta_parda"] - dados_brasil["homem_branca"]
+
+# 3. Mulheres pretas vs Mulheres brancas no Amapá
+dados_ap = indicador_1[indicador_1["uf_regiao"] == "Amapá"].iloc[0]
+dif_ap = dados_ap["mulher_preta_parda"] - dados_ap["mulher_branca"]
+
+# Exibindo os resultados formatados com 2 casas decimais
+print(
+    f"- Em Minas Gerais, mulheres pretas/pardas trabalham {dif_mg:.2f} horas a mais que mulheres brancas."
+)
+print(
+    f"- No Brasil, mulheres pretas/pardas trabalham {dif_brasil:.2f} horas a mais que homens brancos."
+)
+print(
+    f"- No Amapá, mulheres pretas/pardas trabalham {dif_ap:.2f} horas a mais (ou {abs(dif_ap):.2f} horas a menos) que mulheres brancas."
+)
